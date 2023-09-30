@@ -9,11 +9,11 @@
     <version>3.1.1</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.coderscampus</groupId>
-  <artifactId>SpringSecurityJWTDemo</artifactId>
+  <groupId>com.fcynnek.assignment15</groupId>
+  <artifactId>PetManagement</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>SpringSecurityJWTDemo</name>
-  <description>Demo project for Spring Boot</description>
+  <name>PetManagement</name>
+  <description>K. Cheng&apos;s final project (assignment #15) for Coders Campus Bootcamp</description>
   <properties>
     <java.version>17</java.version>
   </properties>
