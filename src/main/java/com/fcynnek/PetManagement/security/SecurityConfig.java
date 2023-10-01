@@ -37,9 +37,9 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
 //        .authorizeHttpRequests(request -> request.requestMatchers("**").permitAll().anyRequest().authenticated())
                 .authorizeHttpRequests(request ->
-//                                request.requestMatchers("/api/v1/auth/**").permitAll()
-                				  request.requestMatchers("/").permitAll()
-                                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
+                                request.requestMatchers("/api/v1/auth/**").permitAll()
+//                				request.requestMatchers("/").permitAll()
+//                                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
                                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                                         .requestMatchers("/dashboard").authenticated()
                                         .anyRequest().permitAll()
