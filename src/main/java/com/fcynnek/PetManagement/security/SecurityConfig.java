@@ -39,9 +39,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request ->
 //                                request.requestMatchers("/api/v1/auth/**").permitAll()
                 				request.requestMatchers("/**").permitAll()
+                				.requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                                 .requestMatchers("/").permitAll()
+                                .requestMatchers("/about").permitAll()
+                                .requestMatchers("/register").permitAll()
+                                .requestMatchers("/dashboard").authenticated()
 //                                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
-//                                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
 //                                        .requestMatchers("/dashboard").authenticated()
                                         .anyRequest().permitAll()
                         )
