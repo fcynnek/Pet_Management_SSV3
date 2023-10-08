@@ -17,7 +17,7 @@ import com.fcynnek.PetManagement.security.JwtService;
 import com.fcynnek.PetManagement.service.RefreshTokenService;
 
 @RestController
-//@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final RefreshTokenService refreshTokenService;

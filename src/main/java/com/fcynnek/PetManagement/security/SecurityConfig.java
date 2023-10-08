@@ -2,6 +2,7 @@ package com.fcynnek.PetManagement.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -22,7 +23,7 @@ import com.fcynnek.PetManagement.domain.Role;
 import com.fcynnek.PetManagement.service.UserService;
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+//@EnableMethodSecurity
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
@@ -37,12 +38,12 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
 //        .authorizeHttpRequests(request -> request.requestMatchers("**").permitAll().anyRequest().authenticated())
                 .authorizeHttpRequests(request ->
-//                                request.requestMatchers("/api/v1/auth/**").permitAll()
-                				request.requestMatchers("/**").permitAll()
+                                request.requestMatchers("/api/v1/auth/**").permitAll()
+//                				request.requestMatchers(HttpMethod.GET, "/**").permitAll()
                 				.requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                                .requestMatchers("/").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/").permitAll()
                                 .requestMatchers("/about").permitAll()
-                                .requestMatchers("/register").permitAll()
+//                                .requestMatchers("/register").permitAll()
                                 .requestMatchers("/dashboard").authenticated()
 //                                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
 //                                        .requestMatchers("/dashboard").authenticated()
