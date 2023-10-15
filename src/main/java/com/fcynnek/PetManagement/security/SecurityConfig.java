@@ -27,32 +27,40 @@ import com.fcynnek.PetManagement.service.UserService;
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
+    private final LoginSuccessHandler loginSuccessHandler;
     
-    public SecurityConfig (JwtAuthenticationFilter jwtAuthenticationFilter, UserService userService) {
+    public SecurityConfig (JwtAuthenticationFilter jwtAuthenticationFilter, UserService userService, ) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.userService = userService;
+        this.loginSuccessHandler = loginSuccessHandler;
     }
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
 //        .authorizeHttpRequests(request -> request.requestMatchers("**").permitAll().anyRequest().authenticated())
-                .authorizeHttpRequests(request ->
-                                request.requestMatchers("/api/v1/auth/**").permitAll()
-//                				request.requestMatchers(HttpMethod.GET, "/**").permitAll()
+                .authorizeHttpRequests((request) -> {request
+//                                request.requestMatchers("/api/v1/auth/**").permitAll()
+//                				.requestMatchers(HttpMethod.GET, "/**").permitAll()
                 				.requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                                .requestMatchers(HttpMethod.GET, "/").permitAll()
+                                .requestMatchers("/").permitAll()
                                 .requestMatchers("/about").permitAll()
-//                                .requestMatchers("/register").permitAll()
+                                .requestMatchers("/register").permitAll()
                                 .requestMatchers("/dashboard").authenticated()
 //                                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
 //                                        .requestMatchers("/dashboard").authenticated()
-                                        .anyRequest().permitAll()
-                        )
-                .headers(header -> header.frameOptions(frameOption -> frameOption.disable()))
+                                        .anyRequest().permitAll();
+                })
+//                .headers(header -> header.frameOptions(frameOption -> frameOption.disable()))
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider()).addFilterBefore(
-                        jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin(login -> {
+                	login.loginPage("/register");
+                	login.failureUrl("/error");
+                	login.successHandler(loginSuccessHandler);
+                	login.permitAll();
+                });
         return http.build();
     }
 

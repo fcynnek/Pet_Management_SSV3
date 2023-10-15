@@ -70,6 +70,16 @@
       <artifactId>spring-security-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    	<groupId>com.fcynnek.finalproject</groupId>
+    	<artifactId>PetManagement</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+    	<groupId>com.coderscampus.security</groupId>
+    	<artifactId>Unit20Extra</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>
