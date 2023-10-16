@@ -33,16 +33,16 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			Authentication authentication) throws IOException, ServletException {
 		
 		User user = (User) authentication.getPrincipal();
-
-        String accessToken = jwtService.generateToken(new HashMap<>(), user);
-        RefreshToken refreshToken = refreshTokenService.generateRefreshToken(user.getId());
-
-        Cookie accessTokenCookie = CookieUtils.createAccessTokenCookie(accessToken);
-        Cookie refreshTokenCookie = CookieUtils.createRefreshTokenCookie(refreshToken.getRefreshToken());
-
-        response.addCookie(accessTokenCookie);
-        response.addCookie(refreshTokenCookie);
-        response.sendRedirect("/api/v1/users/index");
+//
+//        String accessToken = jwtService.generateToken(new HashMap<>(), user);
+//        RefreshToken refreshToken = refreshTokenService.generateRefreshToken(user.getId());
+//
+//        Cookie accessTokenCookie = CookieUtils.createAccessTokenCookie(accessToken);
+//        Cookie refreshTokenCookie = CookieUtils.createRefreshTokenCookie(refreshToken.getRefreshToken());
+//
+//        response.addCookie(accessTokenCookie);
+//        response.addCookie(refreshTokenCookie);
+//        response.sendRedirect("/api/v1/users/index");
 	}
 
 }
